@@ -1,0 +1,593 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:07.000
+Transcriber: Miguel Cisneros-Franco
+Reviewer: Capa Girl
+
+00:00:10.570 --> 00:00:14.344
+I believe that we can both
+
+00:00:14.344 --> 00:00:16.108
+unravel the mysteries of the universe,
+
+00:00:16.108 --> 00:00:19.732
+and save human lives at the same time
+
+00:00:19.732 --> 00:00:22.317
+through interdisciplinary research.
+
+00:00:22.317 --> 00:00:23.901
+And I'm gonna share with you today
+
+00:00:23.901 --> 00:00:28.351
+just one story, my story, that has crossed these paths.
+
+00:00:28.351 --> 00:00:32.056
+And we start the in supernova remnant Casiopea A,
+
+00:00:32.056 --> 00:00:35.827
+it's one of the youngest ones in our galaxy, about 330 years old.
+
+00:00:35.827 --> 00:00:38.321
+An astronomy colleague approached me one day.
+
+00:00:38.321 --> 00:00:41.668
+And she had over 8 years of magnificent data,
+
+00:00:41.668 --> 00:00:45.755
+just trying to understand the 3D structure of this nebula,
+
+00:00:45.755 --> 00:00:49.700
+the supernova remnant, but she had no way to look at it.
+
+00:00:49.700 --> 00:00:54.021
+So I looked at the data with her and said, "I think I can help you."
+
+00:00:54.021 --> 00:00:56.070
+And although -- and this is all real data
+
+00:00:56.070 --> 00:00:58.537
+you're seeing on the screen above me --
+
+00:00:58.537 --> 00:01:00.445
+this is the Hollywood rendering version,
+
+00:01:00.445 --> 00:01:05.245
+but the rough draft I made with her, looks something more like this.
+
+00:01:05.245 --> 00:01:07.066
+And she was able to make novel discoveries
+
+00:01:07.066 --> 00:01:11.560
+about how supernovas explode, and how shells explode within it,
+
+00:01:11.560 --> 00:01:14.310
+using a piece of software developed at
+
+00:01:14.310 --> 00:01:17.243
+Brigham and Women's Hospital, here in Boston,
+
+00:01:17.243 --> 00:01:19.356
+called "3D Slicer", and it was
+
+00:01:19.356 --> 00:01:23.071
+originally developed for looking at patients' brain scans
+
+00:01:23.071 --> 00:01:27.124
+during surgical planning and doing 3D renderings of anatomy.
+
+00:01:27.124 --> 00:01:31.417
+Who knew our solution was lurking just across the river.
+
+00:01:31.417 --> 00:01:34.869
+Now, people don't believe me when I tell them
+
+00:01:34.869 --> 00:01:37.359
+that astronomy and medical imaging,
+
+00:01:37.359 --> 00:01:40.122
+these two seemingly different fields, are really similar.
+
+00:01:40.122 --> 00:01:43.265
+So we're gonna play a little game I like to call "Which is which."
+
+00:01:43.265 --> 00:01:46.106
+I play this with new doctors and astronomers I work with.
+
+00:01:46.106 --> 00:01:47.962
+I'm gonna show you two images on the screen.
+
+00:01:47.962 --> 00:01:51.567
+One of them is biomedical and one of them is astronomical
+
+00:01:51.567 --> 00:01:54.677
+and you have to pick them correctly in your head.
+
+00:01:54.677 --> 00:01:56.338
+So, here is the first set.
+
+00:01:56.338 --> 00:02:01.148
+And again, one of these is a biomedical and one is astronomical.
+
+00:02:01.148 --> 00:02:07.331
+I'll give you a second to make your little vote mentally --
+
+00:02:07.331 --> 00:02:09.262
+So it turns out the one on the left
+
+00:02:09.262 --> 00:02:12.065
+is some of the raw data of the supernova remnant
+
+00:02:12.065 --> 00:02:14.612
+we were just looking at, and on the right we have
+
+00:02:14.612 --> 00:02:17.548
+an angiogram of a patient's heart and coronary arteries.
+
+00:02:17.548 --> 00:02:18.818
+Okay, we're gonna try another one.
+
+00:02:18.818 --> 00:02:22.450
+Now, this one is much closer to my daily bread and butter.
+
+00:02:22.450 --> 00:02:25.151
+Now, tell me which is which.
+
+00:02:25.151 --> 00:02:27.684
+And one of these is literally millimeters across,
+
+00:02:27.684 --> 00:02:31.269
+and the other is billions of miles.
+
+00:02:35.931 --> 00:02:37.734
+So, it turns out the one on the left
+
+00:02:37.734 --> 00:02:40.336
+is a confocal microscopy image of a human cornea,
+
+00:02:40.336 --> 00:02:43.668
+and, on the right, we have a radio telescope image
+
+00:02:43.668 --> 00:02:46.609
+of the star forming region NGC-1333.
+
+00:02:46.609 --> 00:02:48.969
+Now, aside from the fact that these images look similar,
+
+00:02:48.969 --> 00:02:51.819
+and doctors trying to find like a tumor on a patient's brain,
+
+00:02:51.819 --> 00:02:53.458
+or a young star forming is similar,
+
+00:02:53.458 --> 00:02:55.487
+the way the data comes from the machine
+
+00:02:55.487 --> 00:02:58.336
+or the telescope, is remarkably similar.
+
+00:02:58.336 --> 00:03:00.532
+So, here's a MRI scanner,
+
+00:03:00.532 --> 00:03:02.898
+and if you've never seen the raw data
+
+00:03:02.898 --> 00:03:05.051
+of a patient's brain, this is what it looks like.
+
+00:03:05.051 --> 00:03:07.765
+And when the MRI scanner is acquiring the data
+
+00:03:07.765 --> 00:03:10.840
+it goes in slices, so you can see the patient's nose,
+
+00:03:10.840 --> 00:03:14.154
+their eyes, it kinda progresses towards the middle of the head;
+
+00:03:14.154 --> 00:03:17.960
+you can start to see the cortex, and it steps through
+
+00:03:17.960 --> 00:03:19.945
+to the back of the brain.
+
+00:03:19.945 --> 00:03:21.971
+Now, believe it or not, telescopes,
+
+00:03:21.971 --> 00:03:26.058
+and particularly radio telescopes, operate in a similar manner.
+
+00:03:26.058 --> 00:03:28.252
+If we were to look at the raw data from these telescopes,
+
+00:03:28.252 --> 00:03:31.741
+we're gonna look at a nebula called M16,
+
+00:03:31.741 --> 00:03:35.753
+and we start with this radio telescope at the front of the nebula,
+
+00:03:35.753 --> 00:03:37.767
+stepping back towards the middle of the nebula,
+
+00:03:37.767 --> 00:03:40.140
+just like the middle of the patient's brain,
+
+00:03:40.140 --> 00:03:42.941
+and all those bright regions are where young stars are forming,
+
+00:03:42.941 --> 00:03:45.064
+all the way to the back of the nebula,
+
+00:03:45.064 --> 00:03:47.616
+just like the back of the patient's head.
+
+00:03:47.616 --> 00:03:52.003
+Now, although the doctors are able to then take this data
+
+00:03:52.003 --> 00:03:54.162
+and look at the 3D, and do surgical planning.
+
+00:03:54.162 --> 00:03:57.414
+This is like cutting-edge, just about as good as what you get
+
+00:03:57.414 --> 00:04:00.011
+with any astronomer and this is what they have to look at,
+
+00:04:00.011 --> 00:04:06.857
+to understand the 3D structure and velocity's momentum in our universe.
+
+00:04:06.857 --> 00:04:08.333
+But we can do better.
+
+00:04:08.333 --> 00:04:11.647
+So, you might recognize this nebula, more like this:
+
+00:04:11.647 --> 00:04:15.696
+the famous Hubble image of the Pillars of Creation or the Eagle nebula.
+
+00:04:15.696 --> 00:04:18.979
+And, I'm gonna fade this out onto a radio image,
+
+00:04:18.979 --> 00:04:21.000
+it's a false color in the background,
+
+00:04:21.000 --> 00:04:23.932
+and fade away the Hubble's image you're used to.
+
+00:04:23.932 --> 00:04:27.894
+But, we don't need to just look at this in 3D, we look at it in 2D,
+
+00:04:27.894 --> 00:04:31.964
+and here I'm using a radiology tool kit called OsiriX.
+
+00:04:31.964 --> 00:04:35.049
+When I showed this to astronomer Marc Pound,
+
+00:04:35.049 --> 00:04:37.463
+whose data this is, he was amazed,
+
+00:04:37.463 --> 00:04:40.593
+because he had been trying so hard to study
+
+00:04:40.593 --> 00:04:43.147
+the impact of a young group of stars, and he had this theory
+
+00:04:43.147 --> 00:04:46.234
+that there's wind crashing and tossing the pillars over,
+
+00:04:46.234 --> 00:04:48.566
+and it took him months to prove this
+
+00:04:48.566 --> 00:04:51.391
+with conventional visualization. But, in one shot,
+
+00:04:51.391 --> 00:04:54.732
+you can see the shock wave of wind blasting through
+
+00:04:54.732 --> 00:04:57.462
+across to the left hand side of the screen.
+
+00:04:57.462 --> 00:05:00.436
+Now, I don't think myself or any of my collaborators
+
+00:05:00.436 --> 00:05:03.283
+would've anticipated how far this has gone,
+
+00:05:03.283 --> 00:05:05.864
+and by sharing the medical technology of astronomy
+
+00:05:05.864 --> 00:05:08.510
+and astronomy with medical, we've been able to find
+
+00:05:08.510 --> 00:05:10.450
+new stars, and supernova remnants,
+
+00:05:10.450 --> 00:05:13.802
+and revolutionize how you do heart diagnostics,
+
+00:05:13.802 --> 00:05:18.448
+and look at data for different patients and organize it in data mind net.
+
+00:05:18.448 --> 00:05:20.334
+Now, I don't have time to show you all these great projects.
+
+00:05:20.334 --> 00:05:21.958
+But I'll show you one of them.
+
+00:05:21.958 --> 00:05:23.619
+This is a collaboration I've been working on,
+
+00:05:23.619 --> 00:05:26.398
+called the multiscale hemodynamics project,
+
+00:05:26.398 --> 00:05:29.007
+working with doctors at Brigham &amp;amp; Women's hospital.
+
+00:05:29.007 --> 00:05:32.215
+Now, what this represents is a novel way of doing
+
+00:05:32.215 --> 00:05:35.811
+heart disease diagnostics. And, instead of the conventional
+
+00:05:35.811 --> 00:05:39.582
+invasive angiography, this is just a CT scan,
+
+00:05:39.582 --> 00:05:41.837
+and what you see here are the coronary arteries.
+
+00:05:41.837 --> 00:05:42.832
+So, you have your heart
+
+00:05:42.832 --> 00:05:45.603
+and the arteries wrap around the outside,
+
+00:05:45.603 --> 00:05:48.121
+these are the arteries you worry about getting blocked,
+
+00:05:48.121 --> 00:05:50.422
+and giving you a heart attack, and killing you.
+
+00:05:50.422 --> 00:05:53.051
+So, it's really important that we look at them.
+
+00:05:53.051 --> 00:05:55.067
+Now, this is a CT scan of a patient
+
+00:05:55.067 --> 00:05:59.678
+with a blood flow simulation, that's the coloring up there;
+
+00:05:59.678 --> 00:06:02.099
+that simulation was originally developed
+
+00:06:02.099 --> 00:06:04.602
+for studying the structure of DNA,
+
+00:06:04.602 --> 00:06:08.589
+and the visualization was done with a tool kit called Visit,
+
+00:06:08.589 --> 00:06:12.370
+originally developed for physics simulations, interdisciplinary.
+
+00:06:12.370 --> 00:06:15.753
+Now, my assignment was to try and come up with a new way
+
+00:06:15.753 --> 00:06:17.672
+of looking at this, to make it optimal
+
+00:06:17.672 --> 00:06:20.553
+for the doctors and hospital; how can we make it
+
+00:06:20.553 --> 00:06:22.916
+the most efficient for them for a diagnosis.
+
+00:06:22.916 --> 00:06:24.800
+And I came up with this image.
+
+00:06:24.800 --> 00:06:28.681
+It is 2D, I took the whole artery and collapsed everything
+
+00:06:28.681 --> 00:06:32.808
+into a 2D plane. I got some very quizzical looks
+
+00:06:32.808 --> 00:06:35.972
+when I showed this to the doctors originally, but I was inspired to do
+
+00:06:35.972 --> 00:06:37.968
+this representation from my astronomy work,
+
+00:06:37.968 --> 00:06:40.994
+where we've been using these tree diagrams along the bottom
+
+00:06:40.994 --> 00:06:43.997
+to understand the structure of Nebulae.
+
+00:06:43.997 --> 00:06:45.394
+Well, we were inspired in that work
+
+00:06:45.394 --> 00:06:47.417
+from the bio informatics and genome community,
+
+00:06:47.417 --> 00:06:49.740
+where they use this tree diagrams to understand
+
+00:06:49.740 --> 00:06:51.163
+their gene expression data.
+
+00:06:51.163 --> 00:06:53.753
+They were inspired by the evolutionary biologists,
+
+00:06:53.753 --> 00:06:56.063
+who use these tree diagrams to understand
+
+00:06:56.063 --> 00:06:58.222
+how species evolve, how they're related,
+
+00:06:58.222 --> 00:07:00.950
+the first of which was drawn by Sir Charles Darwin,
+
+00:07:00.950 --> 00:07:04.143
+and here's an example from his 'Origin of the Species'.
+
+00:07:04.143 --> 00:07:07.178
+So, straight from Darwin through biology, physics,
+
+00:07:07.178 --> 00:07:11.580
+astronomy, back to medical imaging. Interdisciplinary.
+
+00:07:11.580 --> 00:07:15.597
+One may say, well, is this 2D representation better?
+
+00:07:15.597 --> 00:07:17.897
+A study of Harvard Medical School
+
+00:07:17.897 --> 00:07:19.839
+aimed to answer that one question.
+
+00:07:19.839 --> 00:07:23.803
+And it turns out if you present the image on the left,
+
+00:07:23.803 --> 00:07:27.112
+to a doctor, on average they find about 39%
+
+00:07:27.112 --> 00:07:28.801
+of the high risk regions
+
+00:07:28.801 --> 00:07:31.760
+that could explode or block your heart and kill you.
+
+00:07:31.760 --> 00:07:34.655
+On the right, we can do a little better,
+
+00:07:34.655 --> 00:07:38.599
+and they're able to find 62% of these high-risk dangerous regions.
+
+00:07:38.599 --> 00:07:40.922
+But we can do even better,
+
+00:07:40.922 --> 00:07:43.564
+simply by changing the colors.
+
+00:07:43.564 --> 00:07:47.001
+So, the rainbow color map is the sin most doctors and astronomers
+
+00:07:47.001 --> 00:07:50.505
+and physicists are guilty of using,
+
+00:07:50.505 --> 00:07:55.342
+and it doesn't focus on the best qualities of your visual system.
+
+00:07:55.342 --> 00:07:58.396
+Human system can see brightness variation, contrast,
+
+00:07:58.396 --> 00:08:01.705
+not really good at that whole red-green-yellow-blue thing.
+
+00:08:01.705 --> 00:08:04.798
+But now, if you look at shades of red and highlight
+
+00:08:04.798 --> 00:08:07.504
+the regions that are most diseased with dark red,
+
+00:08:07.504 --> 00:08:11.256
+now doctors can find 91% of the high-risk regions,
+
+00:08:11.256 --> 00:08:16.427
+simply by changing the colors. (Applause)
+
+00:08:16.427 --> 00:08:18.920
+And I would never known the importance of color,
+
+00:08:18.920 --> 00:08:21.853
+if it was not for my computer science and visualization collaborators
+
+00:08:21.853 --> 00:08:24.250
+showing this to me; so, again,
+
+00:08:24.250 --> 00:08:25.770
+interdisciplinary collaboration.
+
+00:08:25.770 --> 00:08:28.501
+Now, how do you even get a collaboration like this?
+
+00:08:28.501 --> 00:08:30.667
+In the case of astronomical medicine,
+
+00:08:30.667 --> 00:08:33.733
+it started with a Harvard Astronomy professor, Alyssa Goodman,
+
+00:08:33.733 --> 00:08:37.056
+serendipitously meeting a computer scientist
+
+00:08:37.056 --> 00:08:39.914
+and imaging specialist from Brigham and Woman’s Hospital,
+
+00:08:39.914 --> 00:08:42.131
+and their recruitment of a very adventurous,
+
+00:08:42.131 --> 00:08:44.510
+open-minded, young students.
+
+00:08:44.510 --> 00:08:48.157
+And from there, it has exploded and we've pulled in cardiologists,
+
+00:08:48.157 --> 00:08:50.445
+and computer scientists, and radiologists,
+
+00:08:50.445 --> 00:08:55.205
+and astronomers, physicists, chemists, computational physicists,
+
+00:08:55.205 --> 00:08:57.117
+I mean, we've brought so many people together,
+
+00:08:57.117 --> 00:09:00.468
+and it's been enlightening to share domains
+
+00:09:00.468 --> 00:09:02.979
+and information across borders.
+
+00:09:02.979 --> 00:09:04.515
+And we're still going and although
+
+00:09:04.515 --> 00:09:06.099
+most of the people up on the screen
+
+00:09:06.099 --> 00:09:08.018
+are from Harvard and Harvard Med,
+
+00:09:08.018 --> 00:09:12.191
+now we cross different institutions and continents to work together.
+
+00:09:12.191 --> 00:09:14.519
+And all I can say is, it's been wonderful,
+
+00:09:14.519 --> 00:09:16.646
+we're continuing to make new discoveries.
+
+00:09:16.646 --> 00:09:18.713
+And I just urge you,
+
+00:09:18.713 --> 00:09:21.400
+attend conferences not in your own domain,
+
+00:09:21.400 --> 00:09:23.914
+read books and journals not in your own discipline,
+
+00:09:23.914 --> 00:09:27.047
+watch TED talks and come to events like this,
+
+00:09:27.047 --> 00:09:29.227
+and say hi to the neighbor sitting next to you,
+
+00:09:29.227 --> 00:09:31.483
+'cos you really never know
+
+00:09:31.483 --> 00:09:34.382
+where your next great idea is gonna come from.
+
+00:09:34.382 --> 00:09:36.366
+Thank you.
+
+00:09:36.366 --> 00:09:39.280
+(Applause)
+
