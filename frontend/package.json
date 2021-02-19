@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.34",
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
+    "@fortawesome/react-fontawesome": "^0.1.14",
     "@material-ui/lab": "^4.0.0-alpha.54",
     "i18next": "^19.8.9",
+    "i18next-browser-languagedetector": "^6.0.1",
     "jwt-decode": "^3.0.0",
     "ra-data-json-server": "^3.5.2",
     "ra-data-simple-rest": "^3.3.2",
