@@ -3,9 +3,10 @@ import { Switch, Route } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { Home, Login, SignUp, Protected, PrivateRoute } from './views';
-import { Admin } from './admin';
-import { logout } from './utils/auth';
+// import { Home, SignUp, PrivateRoute } from './views';
+import SelectTopic from './views/SelectTopic/index';
+// import { Admin } from './admin';
+// import { logout } from './utils/auth';
 
 const useStyles = makeStyles((theme) => ({
   app: {
@@ -29,13 +30,13 @@ export const Routes: FC = () => {
 
   return (
     <Switch>
-      <Route path="/admin">
+      {/* <Route path="/admin">
         <Admin />
-      </Route>
+      </Route> */}
 
       <div className={classes.app}>
         <header className={classes.header}>
-          <Route path="/login" component={Login} />
+          {/* <Route path="/login" component={Login} />
           <Route path="/signup" component={SignUp} />
           <Route
             path="/logout"
@@ -45,8 +46,8 @@ export const Routes: FC = () => {
               return null;
             }}
           />
-          <PrivateRoute path="/protected" component={Protected} />
-          <Route exact path="/" component={Home} />
+          <PrivateRoute path="/protected" component={Protected} /> */}
+          <Route exact path="/" component={SelectTopic} />
         </header>
       </div>
     </Switch>
