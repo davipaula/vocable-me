@@ -40,3 +40,21 @@ main.topics-scene div.topics-container div:hover h3 {
 main.topics-scene div.topics-container div h3 svg {
   margin-right: 3%;
 }
+
+@media screen and (max-width: 450px) {
+  main.topics-scene h1.topics-title {
+    font-size: 28px;
+    margin: 10% auto;
+  }
+
+  main.topics-scene div.topics-container {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 60vw;
+  }
+
+  main.topics-scene div.topics-container div {
+    justify-self: center !important;
+  }
+}
