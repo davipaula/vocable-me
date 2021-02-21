@@ -7,17 +7,23 @@ import { useTranslation } from 'react-i18next';
 // Constants
 import { topics } from './topics';
 
+// Styles
+import './styles.css';
+
 export default function SelectTopic() {
   const { t } = useTranslation();
   return (
-    <main>
-      <h1>{i18n.t('topics.title')}</h1>
+    <main className="topics-scene">
+      <h1 className="topics-title">{i18n.t('topics.title')}</h1>
       <div className="topics-container">
         {topics.map((topic, index) => {
           return (
             <div key="index">
-              {topic.icon}
-              {topic.label}
+              <h3>
+                {' '}
+                {topic.icon}
+                {topic.label}
+              </h3>
             </div>
           );
         })}

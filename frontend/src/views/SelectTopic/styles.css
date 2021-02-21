@@ -1,0 +1,42 @@
+main.topics-scene h1.topics-title {
+  margin: 4% auto 4% auto;
+  text-align: center;
+}
+
+main.topics-scene div.topics-container {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 60vw;
+  margin: 0 auto;
+  gap: 4%;
+}
+
+main.topics-scene div.topics-container div:nth-of-type(odd) {
+  justify-self: end;
+}
+main.topics-scene div.topics-container div:nth-of-type(even) {
+  justify-self: start;
+}
+
+main.topics-scene div.topics-container div h3 {
+  margin: 0.8% auto;
+  width: 220px;
+  padding: 8% 4%;
+  background-color: var(--medium-grey);
+  color: grey;
+  border-radius: 6px;
+}
+
+main.topics-scene div.topics-container div {
+  cursor: pointer;
+  filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25));
+}
+
+main.topics-scene div.topics-container div:hover h3 {
+  color: var(--amazon);
+}
+
+main.topics-scene div.topics-container div h3 svg {
+  margin-right: 3%;
+}
