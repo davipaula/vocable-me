@@ -1,10 +1,6 @@
 import logging
 
-import sqlalchemy
 from fastapi import HTTPException, status
-from sqlalchemy import String, cast, type_coerce
-from sqlalchemy.dialects import postgresql
-from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Session
 import typing as t
 import psycopg2
@@ -62,19 +58,9 @@ def create_video_caption(db: Session, video_caption: schemas.VideoCaption):
 
 
 def get_video_captions(
-    words: t.List[str], skip: int = 0, limit: int = 10
+    db: Session, words: t.List[str], sentences_per_video: int = 5
 ):
-    con = psycopg2.connect(
-        host="postgres",
-        database="postgres",
-        user="postgres",
-        password="password",
-    )
-
-    cur = con.cursor()
-
-    # execute query
-    cur.execute(
+    query = db.execute(
         f"select * from ( "
         f"select "
         f"     title,	"
@@ -86,15 +72,10 @@ def get_video_captions(
         f"    captions->>'text' similar to '%({'|'.join(words)})%'"
         f"and title = video_caption.title and caption = video_caption.caption"
         f") p "
-        f"where rowNumber <= 5;"
+        f"where rowNumber <= {sentences_per_video};"
     )
 
-    rows = cur.fetchall()
-
-    cur.close()
-    con.close()
-
-    return rows
+    return query.fetchall()
 
 
 def delete_user(db: Session, user_id: int):

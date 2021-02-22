@@ -4,35 +4,66 @@ import os
 import pickle
 from typing import Dict, List
 
-from sklearn.feature_extraction.text import (
-    TfidfVectorizer,
-)
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+import pandas as pd
 
 # Bad hack to access the files
 # TODO fix it
 from data_capturer.text_processor.text_processor import TextProcessor
+
+NUMBER_OF_IMPORTANT_WORDS_PER_TOPIC = 200
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 TED_RESULTS_PATH = "../data/processed/ted_results.jsonl"
 CAPTION_DATASET_PATH = "../data/processed/caption/dataset.jsonl"
 TF_IDF_MODEL_PATH = "../data/model/tf_idf.pkl"
+TF_IDF_MODEL_RESULTS_PATH = "../data/results/model_results.csv"
 
 logger = logging.getLogger(__name__)
 LOG_FORMAT = "[%(asctime)s] [%(levelname)s] %(message)s (%(funcName)s@%(filename)s:%(lineno)s)"
 logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
 
+TOPICS = [
+    "technology",
+    "entertainment",
+    "design",
+    "business",
+    "science",
+    "global issues",
+]
 
-def run(topic: str, n: int = 50):
+
+def run():
+    """
+    Runs TF-IDF for each topic and saves the results as csv
+    """
+    logger.info("Loading TF-IDF model")
     tf_idf_vectors = pickle.load(open(TF_IDF_MODEL_PATH, "rb"))
+    logger.info("Model loaded")
 
-    topic_text = get_topic_text(topic)
-    tf_idf_topic = tf_idf_vectors.transform([topic_text])
-    sorted_vectors = sort_tf_idf_vectors(tf_idf_topic.tocoo())
+    logger.info("Processing model and words")
 
-    return get_top_n_words_from_topic(
-        tf_idf_vectors.get_feature_names(), sorted_vectors, n
+    all_models_results = []
+    # TODO topics are hardcoded. Need to get them from the dataset in the future
+    for topic in TOPICS:
+        topic_text = get_topic_text(topic)
+        tf_idf_topic = tf_idf_vectors.transform([topic_text])
+        sorted_vectors = sort_tf_idf_vectors(tf_idf_topic.tocoo())
+
+        model_results = get_model_results(
+            tf_idf_vectors.get_feature_names(), sorted_vectors, topic
+        )
+
+        all_models_results.extend(model_results)
+    logger.info("Processing finished")
+
+    logger.info("Saving results")
+    pd.DataFrame(all_models_results).to_csv(
+        TF_IDF_MODEL_RESULTS_PATH, index=False
     )
+    logger.info("Results saved")
 
 
 def train() -> None:
@@ -126,6 +157,22 @@ def get_top_n_words_from_topic(feature_names, sorted_vectors, n: int = 10):
     }
 
 
+def get_model_results(feature_names, sorted_vectors, topic):
+    top_n_words = sorted_vectors[:NUMBER_OF_IMPORTANT_WORDS_PER_TOPIC]
+
+    return [
+        {
+            key: value
+            for key, value in (
+                ("topic", topic),
+                ("word", feature_names[index]),
+                ("score", round(score, 4)),
+            )
+        }
+        for index, score in top_n_words
+    ]
+
+
 if __name__ == "__main__":
     # train()
-    print(run("business"))
+    run()
