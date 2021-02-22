@@ -62,8 +62,8 @@ def create_video_caption(db: Session, video_caption: schemas.VideoCaption):
 
 
 def get_video_captions(
-    word: str, skip: int = 0, limit: int = 10
-) -> t.List[schemas.VideoCaption]:
+    words: t.List[str], skip: int = 0, limit: int = 10
+):
     con = psycopg2.connect(
         host="postgres",
         database="postgres",
@@ -75,7 +75,18 @@ def get_video_captions(
 
     # execute query
     cur.execute(
-        f"select title, captions from video_caption, jsonb_array_elements(caption) as captions where captions->>'text' like '%{word}%';"
+        f"select * from ( "
+        f"select "
+        f"     title,	"
+        f"     captions,"
+        f"     row_number() over (partition by title) as rowNumber "
+        f"from video_caption,"
+        f"     jsonb_array_elements(caption) as captions "
+        f"where "
+        f"    captions->>'text' similar to '%({'|'.join(words)})%'"
+        f"and title = video_caption.title and caption = video_caption.caption"
+        f") p "
+        f"where rowNumber <= 5;"
     )
 
     rows = cur.fetchall()
@@ -84,29 +95,6 @@ def get_video_captions(
     con.close()
 
     return rows
-
-    query = (
-        db.query(models.VideoCaption).filter(
-            models.VideoCaption.caption["text"].contains(
-                '"for them not to suffer"'
-            )
-        )
-        # .offset(skip)
-        # .limit(1)
-        # .all()
-    )
-
-    return str(
-        query.statement.compile(
-            dialect=postgresql.dialect(), compile_kwargs={"literal_binds": True}
-        )
-    )
-
-    return db.execute(
-        'select title from video_caption where caption @> \'[{"text":"for them not to suffer"}]\';'
-    )
-    # return "Does it still work?"
-    # return db.engine.execute("select * from video_caption limit 1;")
 
 
 def delete_user(db: Session, user_id: int):
