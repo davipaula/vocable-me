@@ -10,7 +10,7 @@ from db.crud import create_video_caption
 from db.schemas import VideoCaption
 from db.session import SessionLocal
 
-CAPTION_DATASET_PATH = "./app/data/processed/caption/dataset.jsonl"
+CAPTION_DATASET_PATH = "./data/processed/caption/dataset.jsonl"
 
 
 def migrate_json() -> None:

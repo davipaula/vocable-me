@@ -17,12 +17,6 @@ def by_topic(topic: str, number_of_words: int):
 @r.get("/topic/videos/")
 def get_videos_with_words(db=Depends(get_db)):
     topic = "business"
-    words = {
-        "company",
-        "want",
-        "business",
-        "world",
-        "actually",
-    }
+    word = "company"
 
-    return {"value": get_video_captions(db, limit=1)}
+    return {"value": get_video_captions(word, limit=1)}
