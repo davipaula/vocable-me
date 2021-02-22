@@ -3,9 +3,12 @@ import logging
 import sqlalchemy
 from fastapi import HTTPException, status
 from sqlalchemy import String, cast, type_coerce
+from sqlalchemy.dialects import postgresql
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Session
 import typing as t
+import psycopg2
+
 
 from . import models, schemas
 from core.security import get_password_hash
@@ -59,22 +62,51 @@ def create_video_caption(db: Session, video_caption: schemas.VideoCaption):
 
 
 def get_video_captions(
-    db: Session, skip: int = 0, limit: int = 10
+    word: str, skip: int = 0, limit: int = 10
 ) -> t.List[schemas.VideoCaption]:
-    # value = (
-    #     db.query(models.VideoCaption)
-    #     .filter(
-    #         models.VideoCaption.caption['text'].astext
-    #         == '{"text": "for them not to suffer"}'
-    #     )
-    #     .offset(skip)
-    #     .limit(limit)
-    #     .all()
-    # )
+    con = psycopg2.connect(
+        host="postgres",
+        database="postgres",
+        user="postgres",
+        password="password",
+    )
 
-    # return db.execute("select title from video_caption where caption @> '[{\"text\":\"for them not to suffer\"}]';")
-    return "Does it still work?"
-    # return db.execute("select * from video_caption limit 1;")
+    cur = con.cursor()
+
+    # execute query
+    cur.execute(
+        f"select title, captions from video_caption, jsonb_array_elements(caption) as captions where captions->>'text' like '%{word}%';"
+    )
+
+    rows = cur.fetchall()
+
+    cur.close()
+    con.close()
+
+    return rows
+
+    query = (
+        db.query(models.VideoCaption).filter(
+            models.VideoCaption.caption["text"].contains(
+                '"for them not to suffer"'
+            )
+        )
+        # .offset(skip)
+        # .limit(1)
+        # .all()
+    )
+
+    return str(
+        query.statement.compile(
+            dialect=postgresql.dialect(), compile_kwargs={"literal_binds": True}
+        )
+    )
+
+    return db.execute(
+        'select title from video_caption where caption @> \'[{"text":"for them not to suffer"}]\';'
+    )
+    # return "Does it still work?"
+    # return db.engine.execute("select * from video_caption limit 1;")
 
 
 def delete_user(db: Session, user_id: int):
