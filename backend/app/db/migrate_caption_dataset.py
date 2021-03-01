@@ -10,7 +10,7 @@ from db.crud import create_video_caption
 from db.schemas import VideoCaption
 from db.session import SessionLocal
 
-CAPTION_DATASET_PATH = "./app/data/processed/caption/dataset.jsonl"
+CAPTION_DATASET_PATH = "./data/processed/caption/dataset.jsonl"
 
 
 def migrate_json() -> None:
@@ -36,9 +36,7 @@ def migrate_json() -> None:
 
 
 def create_table():
-    engine = create_engine(
-        config.SQLALCHEMY_DATABASE_URI,
-    )
+    engine = create_engine(config.SQLALCHEMY_DATABASE_URI,)
     metadata = MetaData()
 
     video_caption = Table(
@@ -51,6 +49,11 @@ def create_table():
     print("Creating tables")
     metadata.drop_all(engine)
     metadata.create_all(engine)
+
+    db = SessionLocal()
+    db.execute(
+        f"CREATE INDEX ON video_caption((video_caption.caption->'text'));"
+    )
 
 
 def get_values():
