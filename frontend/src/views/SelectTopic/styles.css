@@ -1,5 +1,11 @@
+main.topics-scene div.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1%;
+}
+
 main.topics-scene h1.topics-title {
-  margin: 4% auto 4% auto;
+  margin: 3% auto 4% auto;
   text-align: center;
 }
 
@@ -23,7 +29,7 @@ main.topics-scene div.topics-container div h3 {
   margin: 0.8% auto;
   width: 220px;
   padding: 8% 4%;
-  background-color: var(--medium-grey);
+  background-color: #f8f8f8;
   color: grey;
   border-radius: 6px;
 }
@@ -41,7 +47,7 @@ main.topics-scene div.topics-container div h3 svg {
   margin-right: 3%;
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 600px) {
   main.topics-scene h1.topics-title {
     font-size: 28px;
     margin: 10% auto;
@@ -52,9 +58,10 @@ main.topics-scene div.topics-container div h3 svg {
     display: grid;
     grid-template-columns: 1fr;
     width: 60vw;
+    margin-bottom: 2%;
   }
 
   main.topics-scene div.topics-container div {
-    justify-self: center !important;
+    justify-self: stretch !important;
   }
 }
