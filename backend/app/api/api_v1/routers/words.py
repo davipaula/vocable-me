@@ -2,7 +2,7 @@ import logging
 
 from fastapi import APIRouter, Depends
 
-from db.crud import get_video_captions, test_connection
+from db.crud import get_video_captions
 from db.session import get_db
 from model import tf_idf
 
@@ -34,6 +34,7 @@ def get_topics():
             "global issues",
         ]
     }
+
 
 @r.get("/sentences/")
 def get_captions_containing_most_important_words(
