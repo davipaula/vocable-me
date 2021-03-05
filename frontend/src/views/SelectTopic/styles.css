@@ -25,26 +25,69 @@ main.topics-scene div.topics-container div:nth-of-type(even) {
   justify-self: start;
 }
 
+main.topics-scene div.topics-container div:last-of-type {
+  margin-bottom: 5%;
+}
+
 main.topics-scene div.topics-container div h3 {
   margin: 0.8% auto;
-  width: 220px;
+  width: 240px;
   padding: 8% 4%;
   background-color: #f8f8f8;
-  color: grey;
+  color: var(--english-violet);
   border-radius: 6px;
 }
 
+main.topics-scene div.topics-container div h3.disabled-topics {
+  color: #d8d8d8;
+}
+
 main.topics-scene div.topics-container div {
-  cursor: pointer;
   filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25));
 }
 
-main.topics-scene div.topics-container div:hover h3 {
+main.topics-scene div.topics-container div.enabled-topics {
+  cursor: pointer;
+}
+
+main.topics-scene div.topics-container div:hover h3.enabled-topics {
   color: var(--amazon);
 }
 
 main.topics-scene div.topics-container div h3 svg {
   margin-right: 3%;
+}
+
+div.loader {
+  text-align: center;
+}
+
+/* Tooltip */
+.tooltip {
+  position: relative;
+  display: inline-block; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  top: 50%;
+  left: 60%;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 9;
+  font-size: 10px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
 
 @media screen and (max-width: 600px) {
