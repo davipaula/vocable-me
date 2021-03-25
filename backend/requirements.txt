@@ -24,3 +24,4 @@ webvtt-py==0.4.6
 beautifulsoup4==4.9.3
 spacy==2.3.5
 pandas==1.2.2
+aiofiles==0.6.0

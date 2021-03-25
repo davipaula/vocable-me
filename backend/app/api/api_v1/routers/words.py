@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends
 
 from db.crud import get_video_captions
 from db.session import get_db
-from model import tf_idf
+from data_capturer.audio_extractor import audio_extractor
 
 import pandas as pd
 
@@ -13,13 +13,6 @@ words_router = r = APIRouter()
 logger = logging.getLogger(__name__)
 LOG_FORMAT = "[%(asctime)s] [%(levelname)s] %(message)s (%(funcName)s@%(filename)s:%(lineno)s)"
 logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
-
-
-@r.get("/words/")
-def by_topic(topic: str, number_of_words: int):
-    most_important_words = tf_idf.run(topic, number_of_words)
-
-    return {"topic": topic, "words": most_important_words}
 
 
 @r.get("/topics/")
@@ -54,7 +47,7 @@ def get_captions_containing_most_important_words(
 
     logger.info("Getting data from DB")
     video_captions = get_video_captions(
-        db, topic_important_words, sentences_per_video=number_of_sentences
+        db, topic_important_words, number_of_sentences
     )
     logger.info("Data retrieved")
 
@@ -81,3 +74,8 @@ def get_captions_containing_most_important_words(
 
     logger.info("Finished sentences processing")
     return captions_containing_important_words
+
+
+@r.get("/audio_extraction")
+def audio_extraction():
+    audio_extractor.run()

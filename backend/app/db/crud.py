@@ -3,7 +3,6 @@ import logging
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 import typing as t
-import psycopg2
 
 
 from . import models, schemas
@@ -58,8 +57,12 @@ def create_video_caption(db: Session, video_caption: schemas.VideoCaption):
 
 
 def get_video_captions(
-    db: Session, words: t.List[str], sentences_per_video: int = 5
+    db: Session,
+    words: t.List[str],
+    sentences_per_video: int = 5,
+    number_of_videos: int = 3,
 ):
+    rows_limit = sentences_per_video * number_of_videos * len(words)
     query = db.execute(
         f"select * from ( "
         f"select "
@@ -72,10 +75,15 @@ def get_video_captions(
         f"    captions->>'text' similar to '%({'|'.join(words)})%'"
         f"and title = video_caption.title and caption = video_caption.caption"
         f") p "
-        f"where rowNumber <= {sentences_per_video};"
+        f"where rowNumber <= {sentences_per_video}"
+        f"limit {rows_limit};"
     )
 
     return query.fetchall()
+
+
+def format_output_filename():
+    pass
 
 
 def delete_user(db: Session, user_id: int):
