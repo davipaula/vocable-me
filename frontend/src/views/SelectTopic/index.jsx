@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 // i18n
 import i18n from '../../i18n/index';
@@ -8,20 +9,38 @@ import { comingSoonTopics, actualTopics } from './topics';
 
 // Components
 import Loader from 'react-loader-spinner';
+import TopicCard from './components/TopicCard';
+
+// Actions
+import { addRemoveTopic } from '../../redux/actions/actionTopics';
 
 // Styles
 import './styles.css';
 
-export default class SelectTopic extends Component {
+const mapStateToProps = (state) => {
+  return {
+    selectedTopics: state.topics,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  addRemoveTopic: (topic) => {
+    dispatch(addRemoveTopic(topic));
+  },
+});
+
+class SelectTopic extends Component {
   state = {
-    topics: [],
+    availableTopics: [],
     loading: false,
   };
   componentDidMount() {
     this.setState({ loading: true });
     fetch('http://localhost:8000/api/v1/topics/')
       .then((res) => res.json())
-      .then((data) => this.setState({ loading: false, topics: data.topics }))
+      .then((data) =>
+        this.setState({ loading: false, availableTopics: data.topics })
+      )
       .catch((err) => {
         console.error(err);
         this.setState({ loading: false });
@@ -30,8 +49,10 @@ export default class SelectTopic extends Component {
 
   render() {
     // const { t } = useTranslation();
-    const { topics, loading } = this.state;
-    const availableTopics = topics.length > 0 && actualTopics(topics);
+    const { availableTopics, loading } = this.state;
+    const { addRemoveTopic, selectedTopics } = this.props;
+    const topicsWithIcons =
+      availableTopics.length > 0 && actualTopics(availableTopics);
 
     return (
       <main className="topics-scene">
@@ -53,30 +74,29 @@ export default class SelectTopic extends Component {
           />
         ) : (
           <div className="topics-container">
-            {availableTopics &&
-              availableTopics.map((topic, index) => {
+            {topicsWithIcons &&
+              topicsWithIcons.map((topic, index) => {
+                const selectedTopic = selectedTopics.topics.includes(
+                  topic.label
+                );
                 return (
-                  <div key={index} className="enabled-topics">
-                    <h3 className="enabled-topics">
-                      {' '}
-                      {topic.icon}
-                      {topic.label}
-                    </h3>
-                  </div>
+                  <TopicCard
+                    topic={topic}
+                    comingSoon={false}
+                    index={index}
+                    onClick={addRemoveTopic}
+                    selected={selectedTopic}
+                  />
                 );
               })}
             {comingSoonTopics.map((topic, index) => {
               return (
-                <div key={index} className="tooltip">
-                  <h3 className="disabled-topics">
-                    {' '}
-                    {topic.icon}
-                    {topic.label}
-                  </h3>
-                  <span className="tooltiptext">
-                    This topic is coming soon!
-                  </span>
-                </div>
+                <TopicCard
+                  topic={topic}
+                  comingSoon={true}
+                  index={index}
+                  onClick={addRemoveTopic}
+                />
               );
             })}
           </div>
@@ -85,3 +105,5 @@ export default class SelectTopic extends Component {
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectTopic);

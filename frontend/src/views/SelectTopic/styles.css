@@ -36,6 +36,21 @@ main.topics-scene div.topics-container div h3 {
   background-color: #f8f8f8;
   color: var(--english-violet);
   border-radius: 6px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+main.topics-scene div.topics-container div h3:after {
+  content: '';
+  background: #90ee90;
+
+  opacity: 0;
+  transition: all 0.8s;
+}
+
+main.topics-scene div.topics-container div h3:active:after {
+  opacity: 1;
+  transition: 0s;
 }
 
 main.topics-scene div.topics-container div h3.disabled-topics {
@@ -56,6 +71,15 @@ main.topics-scene div.topics-container div:hover h3.enabled-topics {
 
 main.topics-scene div.topics-container div h3 svg {
   margin-right: 3%;
+}
+
+main.topics-scene div.topics-container div h3.chosen-topic {
+  background-color: #c0c0c0;
+  color: var(--amazon);
+}
+
+main.topics-scene div.topics-container div h3.chosen-topic svg {
+  color: red;
 }
 
 div.loader {

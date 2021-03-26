@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import reduxThunk from 'redux-thunk';
 import { Topics } from './reducers/Topics';
 import * as ActionTypes from './actions/actionTypes';
@@ -22,8 +23,12 @@ export const ConfigureStore = () => {
     };
   };
   // TODO: When deploying, check .env to remove logger
-  return createStore(
-    rootReducer,
+  return configureStore(
+    {
+      reducer: {
+        topics: Topics,
+      },
+    },
     // logger must be the last middleware of the chain
     // composeEnhancers(applyMiddleware(reduxThunk, logger))
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
@@ -31,3 +36,4 @@ export const ConfigureStore = () => {
 };
 
 export const store = ConfigureStore();
+console.log(store.getState());
