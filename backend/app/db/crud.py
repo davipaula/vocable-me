@@ -1,12 +1,13 @@
 import logging
+from typing import List
 
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
-import typing as t
 
 
 from . import models, schemas
 from core.security import get_password_hash
+from .video_caption import VideoCaption
 
 logger = logging.getLogger(__name__)
 LOG_FORMAT = "[%(asctime)s] [%(levelname)s] %(message)s (%(funcName)s@%(filename)s:%(lineno)s)"
@@ -26,7 +27,7 @@ def get_user_by_email(db: Session, email: str) -> schemas.UserBase:
 
 def get_users(
     db: Session, skip: int = 0, limit: int = 100
-) -> t.List[schemas.UserOut]:
+) -> List[schemas.UserOut]:
     return db.query(models.User).offset(skip).limit(limit).all()
 
 
@@ -47,7 +48,7 @@ def create_user(db: Session, user: schemas.UserCreate):
 
 
 def create_video_caption(db: Session, video_caption: schemas.VideoCaption):
-    db_video_caption = models.VideoCaption(
+    db_video_caption = models.RawVideoCaption(
         title=video_caption.title, caption=video_caption.caption
     )
     db.add(db_video_caption)
@@ -58,11 +59,9 @@ def create_video_caption(db: Session, video_caption: schemas.VideoCaption):
 
 def get_video_captions(
     db: Session,
-    words: t.List[str],
+    words: List[str],
     sentences_per_video: int = 5,
-    number_of_videos: int = 3,
-):
-    rows_limit = sentences_per_video * number_of_videos * len(words)
+) -> List[VideoCaption]:
     query = db.execute(
         f"select * from ( "
         f"select "
@@ -75,15 +74,17 @@ def get_video_captions(
         f"    captions->>'text' similar to '%({'|'.join(words)})%'"
         f"and title = video_caption.title and caption = video_caption.caption"
         f") p "
-        f"where rowNumber <= {sentences_per_video}"
-        f"limit {rows_limit};"
+        f"where rowNumber <= {sentences_per_video};"
     )
 
-    return query.fetchall()
+    query_results = query.fetchall()
 
-
-def format_output_filename():
-    pass
+    return [
+        VideoCaption(
+            result[0], result[1]["text"], result[1]["start"], result[1]["end"]
+        )
+        for result in query_results
+    ]
 
 
 def delete_user(db: Session, user_id: int):

@@ -10,7 +10,7 @@ from db.crud import create_video_caption
 from db.schemas import VideoCaption
 from db.session import SessionLocal
 
-CAPTION_DATASET_PATH = "./data/processed/caption/dataset.jsonl"
+CAPTION_DATASET_PATH = "./data/processed/text/dataset.jsonl"
 
 
 def migrate_json() -> None:
@@ -43,7 +43,7 @@ def create_table():
         "video_caption",
         metadata,
         Column("title", String, primary_key=True),
-        Column("caption", JSONB),
+        Column("text", JSONB),
     )
 
     print("Creating tables")
@@ -52,13 +52,13 @@ def create_table():
 
     db = SessionLocal()
     db.execute(
-        f"CREATE INDEX ON video_caption((video_caption.caption->'text'));"
+        f"CREATE INDEX ON video_caption((video_caption.text->'text'));"
     )
 
 
 def get_values():
     db = SessionLocal()
-    values = db.query(m.VideoCaption).all()
+    values = db.query(m.RawVideoCaption).all()
 
     print(f"{len(values)} records inserted")
 
