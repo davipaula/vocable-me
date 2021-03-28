@@ -1,0 +1,8 @@
+div.loader {
+  margin-top: 10%;
+  margin-bottom: auto;
+}
+
+div.MuiBackdrop-root {
+  background-color: var(--turquoise-green);
+}
