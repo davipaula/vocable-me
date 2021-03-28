@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// i18n
-import i18n from '../../i18n/index';
-
 // Constants
 import { comingSoonTopics, actualTopics } from './topics';
 
 // Components
 import Loader from 'react-loader-spinner';
 import TopicCard from './components/TopicCard';
+import CTA from './components/CTA';
 
 // Actions
-import { addRemoveTopic } from '../../redux/actions/actionTopics';
+import { addRemoveTopic, toggleModal } from '../../redux/actions/actionTopics';
 
 // Styles
 import './styles.css';
@@ -26,6 +24,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   addRemoveTopic: (topic) => {
     dispatch(addRemoveTopic(topic));
+  },
+  toggleModal: (open) => {
+    dispatch(toggleModal(open));
   },
 });
 
@@ -50,7 +51,7 @@ class SelectTopic extends Component {
   render() {
     // const { t } = useTranslation();
     const { availableTopics, loading } = this.state;
-    const { addRemoveTopic, selectedTopics } = this.props;
+    const { addRemoveTopic, selectedTopics, toggleModal } = this.props;
     const topicsWithIcons =
       availableTopics.length > 0 && actualTopics(availableTopics);
 
@@ -63,7 +64,7 @@ class SelectTopic extends Component {
             className="site-logo"
           />
         </div>
-        <h1 className="topics-title">{i18n.t('topics.title')}</h1>
+        <CTA selectedTopics={selectedTopics} toggleModal={toggleModal} />
         {loading ? (
           <Loader
             type="Circles"
@@ -86,6 +87,7 @@ class SelectTopic extends Component {
                     index={index}
                     onClick={addRemoveTopic}
                     selected={selectedTopic}
+                    key={`${topic}-${index}`}
                   />
                 );
               })}
@@ -96,6 +98,7 @@ class SelectTopic extends Component {
                   comingSoon={true}
                   index={index}
                   onClick={addRemoveTopic}
+                  key={`${topic}-${index}`}
                 />
               );
             })}

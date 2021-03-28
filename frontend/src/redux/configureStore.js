@@ -1,17 +1,6 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { compose } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
-import reduxThunk from 'redux-thunk';
 import { Topics } from './reducers/Topics';
-import * as ActionTypes from './actions/actionTypes';
-
-// Redux LOGGER
-// const logger = createLogger({
-//   predicate: (getState, action) => {
-//     var condition = true;
-//     condition &= !action.type.includes(ActionTypes.ROUTE_CHANGED); // Filter the ROUTE_CHANGED Action, to avoid logging it in the console.
-//     return condition;
-//   },
-// });
 
 export const ConfigureStore = () => {
   const composeEnhancers =
@@ -36,4 +25,3 @@ export const ConfigureStore = () => {
 };
 
 export const store = ConfigureStore();
-console.log(store.getState());

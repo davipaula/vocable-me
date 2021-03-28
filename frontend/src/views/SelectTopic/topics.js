@@ -11,7 +11,6 @@ import {
   faHandshake,
   faDumbbell,
   faBook,
-  faBalanceScale,
   faPalette,
   faTv,
   faFlask,

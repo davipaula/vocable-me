@@ -1,0 +1,65 @@
+div.topics-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35vw;
+  margin: auto;
+}
+
+div.topics-modal div.modal-content {
+  background-color: whitesmoke;
+  padding: 2%;
+  color: var(--english-violet);
+  border-radius: 6px;
+  padding: 4% 6%;
+}
+
+div.topics-modal div.modal-content h2 {
+  color: var(--amazon);
+}
+
+div.topics-modal div.modal-content div#topics-modal-description {
+  line-height: 200%;
+  font-weight: 500;
+}
+
+div.topics-modal div.modal-content div#topics-modal-description select {
+  margin-left: 2%;
+  padding: 1%;
+}
+
+div.topics-modal
+  div.modal-content
+  div#topics-modal-description
+  button.submit-modal {
+  display: block;
+  border-radius: 6px;
+  border: none;
+  background-color: var(--amazon);
+  padding: 1% 2%;
+  color: whitesmoke;
+  font-size: 20px;
+  margin-left: 1%;
+  cursor: pointer;
+  filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25));
+  margin: 2% 0 0 auto;
+}
+
+div.topics-modal div.modal-content div#topics-modal-description a {
+  text-decoration: none;
+}
+
+div.topics-modal
+  div.modal-content
+  div#topics-modal-description
+  button.submit-modal:focus {
+  outline: none;
+}
+
+div.topics-modal
+  div.modal-content
+  div#topics-modal-description
+  button.submit-modal:hover {
+  background-color: whitesmoke;
+  color: var(--amazon);
+}
