@@ -19,7 +19,7 @@ def select_video_captions() -> List[VideoCaption]:
     In total, we will end up with a maximum of 200 * 10 * 5 = 10,000 audio files
     """
     # We already have saved the top 200 most important words per topic
-    important_words = get_unique_important_words()
+    important_words = get_unique_important_words()[:3]
 
     sentences_per_word = 10
 
@@ -30,4 +30,4 @@ def select_video_captions() -> List[VideoCaption]:
 
 
 if __name__ == "__main__":
-    print(select_video_captions())
+    print(len(select_video_captions()))

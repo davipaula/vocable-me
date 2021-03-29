@@ -7,13 +7,6 @@ def _clean_text(text):
     return text.replace("\n", " ")
 
 
-def _format_file_name(start_time: str, end_time: str, title: str):
-    start = _format_time(start_time)
-    end = _format_time(end_time)
-
-    return f"{start}-{end}-{title}.mp3"
-
-
 class VideoCaption:
     def __init__(self, title: str, text: str, start_time: str, end_time: str):
         self.video_id = title

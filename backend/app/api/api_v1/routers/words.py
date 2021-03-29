@@ -2,6 +2,9 @@ import logging
 
 from fastapi import APIRouter, Depends
 
+from data_capturer.audio_extractor.audio_extractor import (
+    get_available_audio_files, get_processed_video_ids,
+)
 from db.crud import get_video_captions
 from db.session import get_db
 from data_capturer.audio_extractor import audio_extractor
@@ -46,9 +49,14 @@ def get_captions_containing_most_important_words(
         most_important_words["topic"] == topic
     ]["word"][:number_of_words].tolist()
 
+    available_audios = get_processed_video_ids()
+
     logger.info("Getting data from DB")
     video_captions = get_video_captions(
-        db, topic_important_words, number_of_sentences
+        db,
+        topic_important_words,
+        number_of_sentences,
+        video_titles=available_audios,
     )
     logger.info("Data retrieved")
 

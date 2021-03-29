@@ -61,24 +61,39 @@ def get_video_captions(
     db: Session,
     words: List[str],
     sentences_per_video: int = 5,
+    videos_per_word: int = 5,
+    video_titles: List[str] = None,
 ) -> List[VideoCaption]:
-    query = db.execute(
-        f"select * from ( "
-        f"select "
-        f"     title,	"
-        f"     captions,"
-        f"     row_number() over (partition by title) as rowNumber "
-        f"from video_caption,"
-        f"     jsonb_array_elements(caption) as captions "
-        f"where "
-        f"    captions->>'text' similar to '%({'|'.join(words)})%'"
-        f"and title = video_caption.title and caption = video_caption.caption"
-        f") p "
-        f"where rowNumber <= {sentences_per_video};"
-    )
+    # TODO fix this terrible query creation. There should be a clever way to do it
+    base_query = """select * from (
+        select
+        title,
+        captions,
+        row_number() over (partition by title) as rowNumber 
+        from video_caption, jsonb_array_elements(caption) as captions """
+
+    where_query = f"""
+    where
+        captions->>'text' similar to '%({'|'.join(words)})%'
+        and title = video_caption.title
+        and caption = video_caption.caption """
+
+    if video_titles is not None:
+        where_query += f" and title in ({','.join(video_titles)})"
+
+    end_query = f"""
+    ) p
+    where rowNumber <= {sentences_per_video}
+    limit {sentences_per_video * videos_per_word * len(words)};
+    """
+
+    query = db.execute(base_query + where_query + end_query)
 
     query_results = query.fetchall()
 
+    logger.info(f"{len(query_results)} results retrieved")
+
+    # TODO investigate a better way to instantiate this object
     return [
         VideoCaption(
             result[0], result[1]["text"], result[1]["start"], result[1]["end"]

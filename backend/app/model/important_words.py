@@ -96,9 +96,7 @@ def get_top_n_words_from_topic(feature_names, sorted_vectors, n: int = 10):
     }
 
 
-def generate_important_words_in_topic(
-    tf_idf_model, topic: str
-) -> List[Dict]:
+def generate_important_words_in_topic(tf_idf_model, topic: str) -> List[Dict]:
     """
     Runs TF-IDF with the texts of the topic and returns the top N words according to TF-IDF score
     """
@@ -125,6 +123,12 @@ def get_unique_important_words() -> List[str]:
     important_words_df = pd.read_csv(IMPORTANT_WORDS_PER_TOPIC_PATH)
 
     return important_words_df["word"].unique().tolist()
+
+
+def get_important_words_and_topics() -> List[Dict]:
+    important_words_df = pd.read_csv(IMPORTANT_WORDS_PER_TOPIC_PATH)
+
+    return important_words_df[["topic", "word"]].to_dict(orient='records')
 
 
 if __name__ == "__main__":
