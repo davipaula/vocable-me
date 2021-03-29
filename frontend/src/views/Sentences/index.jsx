@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 // Components
 import Loader from 'react-loader-spinner';
 import { AutoRotatingCarousel, Slide } from 'material-auto-rotating-carousel';
+import { faVolumeUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Styles
 import './sentencesStyles.css';
@@ -33,9 +35,10 @@ class Sentences extends Component {
             `http://localhost:8000/api/v1/sentences/?topic=${topic}&number_of_words=${wordsNr}&number_of_sentences=5`
           )
             .then((res) => res.json())
-            .then((data) =>
-              this.setState({ words: this.state.words.concat(data.words) })
-            )
+            .then((data) => {
+              data.words.map((word) => (word.topic = topic));
+              this.setState({ words: this.state.words.concat(data.words) });
+            })
             .catch((err) => {
               console.error(err);
               this.setState({
@@ -50,6 +53,7 @@ class Sentences extends Component {
   render() {
     const { selectedTopics } = this.props;
     const { words, errorMsg } = this.state;
+    console.log(words);
     const loading =
       selectedTopics.length > 0 && words.length === 0 ? true : false;
     const error = errorMsg.length > 1 ? true : false;
@@ -59,9 +63,16 @@ class Sentences extends Component {
         return (
           <Slide
             media={
-              <div>
+              <div className="sentences-container">
                 {word.sentences.map((sentence, i) => {
-                  return <p key={`${sentence}-${i}`}>{sentence}</p>;
+                  return (
+                    <div className="sentence-block">
+                      <FontAwesomeIcon icon={faVolumeUp} />
+                      <p key={`${sentence}-${i}`} className="sentence">
+                        {sentence}
+                      </p>
+                    </div>
+                  );
                 })}
               </div>
             }
@@ -69,8 +80,8 @@ class Sentences extends Component {
               backgroundColor: 'whiteSmoke',
               height: 'calc(100% - 150px)',
             }}
-            title={word.word}
-            subtitle="We provide you the coolest way to learn new vocabulary about the topics you love. Have fun!"
+            title={word.topic}
+            subtitle={word.word}
             key={index}
             style={{
               backgroundColor: 'var(--amazon)',
