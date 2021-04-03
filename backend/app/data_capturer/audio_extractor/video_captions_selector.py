@@ -1,10 +1,10 @@
 from typing import List
 
-from db.crud import get_video_captions
-from db.session import SessionLocal
-from db.video_caption import VideoCaption
+from app.db.crud import get_video_captions
+from app.db.session import SessionLocal
+from app.db.video_caption import VideoCaption
 
-from model.important_words import get_unique_important_words
+from app.model.important_words import get_unique_important_words
 
 
 def select_video_captions() -> List[VideoCaption]:
@@ -19,9 +19,9 @@ def select_video_captions() -> List[VideoCaption]:
     In total, we will end up with a maximum of 200 * 10 * 5 = 10,000 audio files
     """
     # We already have saved the top 200 most important words per topic
-    important_words = get_unique_important_words()[:3]
+    important_words = get_unique_important_words()[:70]
 
-    sentences_per_word = 10
+    sentences_per_word = 5
 
     # this is terrible. We shouldn't be getting anything related to DB connection here
     db = SessionLocal()
@@ -30,4 +30,5 @@ def select_video_captions() -> List[VideoCaption]:
 
 
 if __name__ == "__main__":
-    print(len(select_video_captions()))
+    for caption in select_video_captions()[:5]:
+        print(f"start_time: {caption.start_time}, text: {caption.text} \n")

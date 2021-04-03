@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 
 
 from . import models, schemas
-from core.security import get_password_hash
+from app.core.security import get_password_hash
 from .video_caption import VideoCaption
 
 logger = logging.getLogger(__name__)

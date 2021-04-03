@@ -1,21 +1,25 @@
 import logging
+from typing import List
 
 from tqdm import tqdm
 
-from data_capturer.audio_extractor.audio_extractor import (
+from app.data_capturer.audio_extractor.audio_extractor import (
     get_available_audio_files,
     get_processed_video_ids,
 )
-from db.crud import get_video_captions
-from db.session import SessionLocal
-from model.important_words import (
+from app.data_capturer.dataset_finalizer.sentence_audio_file import (
+    SentenceAudioFile,
+)
+from app.data_capturer.dataset_finalizer.words_by_topics import WordsByTopics
+from app.db.crud import get_video_captions
+from app.db.session import SessionLocal
+from app.db.video_caption import VideoCaption
+from app.model.important_words import (
     get_important_words_and_topics,
     get_unique_important_words,
 )
 
 import pandas as pd
-
-from utils import utils
 
 logger = logging.getLogger(__name__)
 LOG_FORMAT = "[%(asctime)s] [%(levelname)s] %(message)s (%(funcName)s@%(filename)s:%(lineno)s)"
@@ -26,37 +30,24 @@ def run():
     # TODO this is terrible. We shouldn't be getting anything related to DB connection here
     db = SessionLocal()
 
-    unique_important_words = get_unique_important_words()
-    available_audios = get_available_audio_files()
-    available_video_titles = get_processed_video_ids()
-    available_audios_filenames = [
-        file["filename"] for file in get_available_audio_files()
-    ]
-
     # Get sentences from unique important words
     sentences = get_video_captions(
-        db=db, words=unique_important_words, video_titles=available_video_titles
+        db=db,
+        words=get_unique_important_words(),
+        video_titles=get_processed_video_ids(),
     )
 
     # Check which sentences were properly processed and prepare result
     available_sentence_audios = get_available_sentence_audios(
-        available_audios, available_audios_filenames, sentences
+        get_available_audio_files(), sentences
     )
 
     logger.info(f"{len(available_sentence_audios)} available sentence audios")
 
-    # Merge with words + topics
-    word_and_topics = get_important_words_and_topics()
-    final_result = []
-    logger.info("Processing words")
-    for word_and_topic in tqdm(word_and_topics):
-        prepared = [
-            {**word_and_topic, **sentence}
-            for sentence in available_sentence_audios
-            if word_and_topic["word"] in sentence["text"]
-        ]
+    print(available_sentence_audios)
 
-        final_result.extend(prepared)
+    # Merge with words + topics
+    final_result = merge_words_and_topics(available_sentence_audios)
 
     # save prepared data as csv
     pd.DataFrame(final_result).to_csv(
@@ -64,26 +55,55 @@ def run():
     )
 
 
+def merge_words_and_topics(
+    available_sentence_audios: List[SentenceAudioFile],
+) -> List[WordsByTopics]:
+    word_and_topics = get_important_words_and_topics()
+
+    logger.info("Merging words and topics")
+    final_result = []
+    for word_and_topic in tqdm(word_and_topics):
+        prepared = [
+            WordsByTopics(
+                word_and_topic["topic"],
+                word_and_topic["word"],
+                sentence.video_id,
+                sentence.audio_file,
+                sentence.text,
+            )
+            for sentence in available_sentence_audios
+            if word_and_topic["word"] in sentence.text.split(" ")
+        ]
+
+        final_result.extend(prepared)
+
+    return final_result
+
+
 def get_available_sentence_audios(
-    available_audios, available_audios_filenames, sentences
-):
+    available_audios, sentences: List[VideoCaption]
+) -> List[SentenceAudioFile]:
+    available_audios_filenames = [file["filename"] for file in available_audios]
+    print(f"Number of filenames {len(available_audios_filenames)}")
+
     final_results = []
     for sentence in sentences:
         if sentence.get_output_filename() not in available_audios_filenames:
+            # logger.info(f"{sentence.get_output_filename()} does not exist")
             continue
 
         # Get all filenames for this sentence
         sentence_audio_files = [
-            {
-                "video_id": sentence.video_id,
-                "audio_file": available_audio["filename"],
-                "text": sentence.text,
-            }
+            SentenceAudioFile(
+                sentence.video_id, available_audio["filename"], sentence.text,
+            )
             for available_audio in available_audios
-            if available_audio["video_id"] == sentence.video_id
+            if available_audio["filename"] == sentence.get_output_filename()
         ]
 
         final_results.extend(sentence_audio_files)
+
+    print(f"Number of final results {len(final_results)}")
 
     return final_results
 

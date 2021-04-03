@@ -5,12 +5,12 @@ from typing import Dict, List, Set
 
 import ffmpeg
 
-from data_capturer.audio_extractor.video_captions_selector import (
+from app.data_capturer.audio_extractor.video_captions_selector import (
     select_video_captions,
 )
 from tqdm import tqdm
 
-from db.video_caption import VideoCaption
+from app.db.video_caption import VideoCaption
 
 HOURS_IN_SECONDS = 360
 MINUTES_IN_SECONDS = 60
@@ -85,6 +85,7 @@ def split_audio_files(video_captions: List[VideoCaption]):
                 "video_id": caption.video_id,
                 "start_time": caption.start_time,
                 "end_time": caption.end_time,
+                "filename": caption.get_output_filename(),
             }
         )
 
@@ -163,4 +164,4 @@ def rewrite_output_files():
 
 
 if __name__ == "__main__":
-    rewrite_output_files()
+    run()

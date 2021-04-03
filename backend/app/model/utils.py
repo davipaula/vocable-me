@@ -2,8 +2,8 @@ import json
 import logging
 from typing import Dict, List
 
-from data_capturer.text_processor.text_processor import TextProcessor
-from model.settings import CAPTION_DATASET_PATH
+from app.data_capturer.text_processor.text_processor import TextProcessor
+from app.model.settings import CAPTION_DATASET_PATH
 
 logger = logging.getLogger(__name__)
 LOG_FORMAT = "[%(asctime)s] [%(levelname)s] %(message)s (%(funcName)s@%(filename)s:%(lineno)s)"

@@ -6,13 +6,13 @@ from typing import Dict, List
 
 import pandas as pd
 
-from model.settings import (
+from app.model.settings import (
     TED_RESULTS_PATH,
     TF_IDF_MODEL_PATH,
     IMPORTANT_WORDS_PER_TOPIC_PATH,
     TOPICS,
 )
-from model.utils import get_captions_text, get_captions_as_json
+from app.model.utils import get_captions_text, get_captions_as_json
 
 NUMBER_OF_IMPORTANT_WORDS_PER_TOPIC = 200
 

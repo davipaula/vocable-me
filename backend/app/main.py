@@ -4,12 +4,12 @@ from fastapi.responses import FileResponse
 from starlette.requests import Request
 import uvicorn
 
-from api.api_v1.routers.users import users_router
-from api.api_v1.routers.auth import auth_router
-from api.api_v1.routers.words import words_router
-from core import config
-from db.session import SessionLocal
-from core.auth import get_current_active_user
+from app.api.api_v1.routers.users import users_router
+from app.api.api_v1.routers.auth import auth_router
+from app.api.api_v1.routers.words import words_router
+from app.core import config
+from app.db.session import SessionLocal
+from app.core.auth import get_current_active_user
 
 # from core.celery_app import celery_app
 # import tasks

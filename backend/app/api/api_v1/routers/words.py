@@ -2,16 +2,16 @@ import logging
 
 from fastapi import APIRouter, Depends
 
-from data_capturer.audio_extractor.audio_extractor import (
+from app.data_capturer.audio_extractor.audio_extractor import (
     get_available_audio_files, get_processed_video_ids,
 )
-from db.crud import get_video_captions
-from db.session import get_db
-from data_capturer.audio_extractor import audio_extractor
+from app.db.crud import get_video_captions
+from app.db.session import get_db
+from app.data_capturer.audio_extractor import audio_extractor
 
 import pandas as pd
 
-from model.settings import IMPORTANT_WORDS_PER_TOPIC_PATH
+from app.model.settings import IMPORTANT_WORDS_PER_TOPIC_PATH
 
 words_router = r = APIRouter()
 
