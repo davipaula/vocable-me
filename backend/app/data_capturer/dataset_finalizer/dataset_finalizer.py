@@ -18,6 +18,7 @@ from app.model.important_words import (
     get_important_words_and_topics,
     get_unique_important_words,
 )
+from app.utils import utils
 
 import pandas as pd
 
@@ -44,15 +45,11 @@ def run():
 
     logger.info(f"{len(available_sentence_audios)} available sentence audios")
 
-    print(available_sentence_audios)
-
     # Merge with words + topics
     final_result = merge_words_and_topics(available_sentence_audios)
 
     # save prepared data as csv
-    pd.DataFrame(final_result).to_csv(
-        "/app/app/data/results/final_dataset.csv", index=False
-    )
+    utils.save_as_json(final_result, "/app/app/data/results/final_dataset.jsonl")
 
 
 def merge_words_and_topics(
