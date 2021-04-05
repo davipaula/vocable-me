@@ -1,4 +1,5 @@
 /backend/app/notebooks/.ipynb_checkpoints/
+!**/__pycache__/
 backend/app/data/processed/caption/dataset.jsonl
 /backend/app/__pycache__
 
