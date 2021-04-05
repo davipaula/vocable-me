@@ -1,13 +1,13 @@
 import logging
+from typing import List
 
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
-import typing as t
-import psycopg2
 
 
 from . import models, schemas
-from core.security import get_password_hash
+from app.core.security import get_password_hash
+from .video_caption import VideoCaption
 
 logger = logging.getLogger(__name__)
 LOG_FORMAT = "[%(asctime)s] [%(levelname)s] %(message)s (%(funcName)s@%(filename)s:%(lineno)s)"
@@ -27,7 +27,7 @@ def get_user_by_email(db: Session, email: str) -> schemas.UserBase:
 
 def get_users(
     db: Session, skip: int = 0, limit: int = 100
-) -> t.List[schemas.UserOut]:
+) -> List[schemas.UserOut]:
     return db.query(models.User).offset(skip).limit(limit).all()
 
 
@@ -48,7 +48,7 @@ def create_user(db: Session, user: schemas.UserCreate):
 
 
 def create_video_caption(db: Session, video_caption: schemas.VideoCaption):
-    db_video_caption = models.VideoCaption(
+    db_video_caption = models.RawVideoCaption(
         title=video_caption.title, caption=video_caption.caption
     )
     db.add(db_video_caption)
@@ -58,24 +58,48 @@ def create_video_caption(db: Session, video_caption: schemas.VideoCaption):
 
 
 def get_video_captions(
-    db: Session, words: t.List[str], sentences_per_video: int = 5
-):
-    query = db.execute(
-        f"select * from ( "
-        f"select "
-        f"     title,	"
-        f"     captions,"
-        f"     row_number() over (partition by title) as rowNumber "
-        f"from video_caption,"
-        f"     jsonb_array_elements(caption) as captions "
-        f"where "
-        f"    captions->>'text' similar to '%({'|'.join(words)})%'"
-        f"and title = video_caption.title and caption = video_caption.caption"
-        f") p "
-        f"where rowNumber <= {sentences_per_video};"
-    )
+    db: Session,
+    words: List[str],
+    sentences_per_video: int = 5,
+    videos_per_word: int = 5,
+    video_titles: List[str] = None,
+) -> List[VideoCaption]:
+    # TODO fix this terrible query creation. There should be a clever way to do it
+    base_query = """select * from (
+        select
+        title,
+        captions,
+        row_number() over (partition by title) as rowNumber 
+        from video_caption, jsonb_array_elements(caption) as captions """
 
-    return query.fetchall()
+    where_query = f"""
+    where
+        captions->>'text' similar to '%({'|'.join(words)})%'
+        and title = video_caption.title
+        and caption = video_caption.caption """
+
+    if video_titles is not None:
+        where_query += f" and title in ({','.join(video_titles)})"
+
+    end_query = f"""
+    ) p
+    where rowNumber <= {sentences_per_video}
+    limit {sentences_per_video * videos_per_word * len(words)};
+    """
+
+    query = db.execute(base_query + where_query + end_query)
+
+    query_results = query.fetchall()
+
+    logger.info(f"{len(query_results)} results retrieved")
+
+    # TODO investigate a better way to instantiate this object
+    return [
+        VideoCaption(
+            result[0], result[1]["text"], result[1]["start"], result[1]["end"]
+        )
+        for result in query_results
+    ]
 
 
 def delete_user(db: Session, user_id: int):

@@ -12,8 +12,8 @@ from data_capturer.video_list_retriever import VideoCaption
 # TODO fix it
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-RAW_DATA_FOLDER = "../data/raw/caption/"
-OUTPUT_FOLDER = "../data/processed/caption/dataset.jsonl"
+RAW_DATA_FOLDER = "../data/raw/text/"
+OUTPUT_FOLDER = "../data/processed/text/dataset.jsonl"
 
 logger = logging.getLogger(__name__)
 LOG_FORMAT = "[%(asctime)s] [%(levelname)s] %(message)s (%(funcName)s@%(filename)s:%(lineno)s)"
@@ -21,7 +21,7 @@ logging.basicConfig(level=logging.NOTSET, format=LOG_FORMAT)
 
 
 def run():
-    logger.info("Loading caption files")
+    logger.info("Loading text files")
     caption_files = [
         os.fsdecode(file)
         for file in os.listdir(RAW_DATA_FOLDER)

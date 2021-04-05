@@ -15,27 +15,34 @@ def run(
 ) -> None:
     video_ids = get_video_ids(video_ids_path, should_check_english)
 
-    print("Downloading video_captions")
-    download_captions(video_ids, base_url, lang)
+    # print("Downloading video_captions")
+    # download_captions(video_ids, base_url, lang)
 
-    # print("Downloading audios")
-    # download_audios(video_ids, base_url, lang)
+    print("Downloading audios")
+    download_audios(video_ids, base_url)
 
 
-def download_audios(video_ids: List[str], base_url: str, lang: str) -> None:
+def download_audios(video_ids: List[str], base_url: str) -> None:
     os.chdir("../../data/raw/audio/")
 
     for video_id in video_ids:
         url = base_url + video_id
+        file_name = video_id.rsplit("/talks/")[1]
+
+        if os.path.isfile(f"{file_name}.mp3"):
+            continue
+
         download_cmd = [
             "youtube-dl",
             "--write-sub",
             "--extract-audio",
             "--audio-format 'mp3'",
+            "--no-check-certificate",
             "-o",
-            f"{video_id}.%(ext)s",
+            f"'{file_name}.%(ext)s'",
             url,
         ]
+        print(" ".join(download_cmd))
         os.system(" ".join(download_cmd))
 
 

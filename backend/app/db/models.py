@@ -16,7 +16,7 @@ class User(Base):
     is_superuser = Column(Boolean, default=False)
 
 
-class VideoCaption(Base):
+class RawVideoCaption(Base):
     __tablename__ = "video_caption"
 
     title = Column(String, primary_key=True)
