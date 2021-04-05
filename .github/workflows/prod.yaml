@@ -60,5 +60,6 @@ jobs:
       with:
         context: frontend
         file: frontend/Dockerfile
-        repository: davinp/vocable_me_front
-        tags: latest
+        pull: true
+        push: true
+        tags: davinp/vocable_me_front:latest
