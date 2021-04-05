@@ -32,7 +32,7 @@ class Sentences extends Component {
     selectedTopics && selectedTopics.length > 0
       ? selectedTopics.forEach((topic, index) => {
           fetch(
-            `http://localhost/api/v1/sentences/?topic=${topic}&number_of_words=${wordsNr}&number_of_sentences=5`
+            `http://localhost:8000/api/v1/sentences/?topic=${topic}&number_of_words=${wordsNr}&number_of_sentences=5`
           )
             .then((res) => res.json())
             .then((data) => {
@@ -68,8 +68,8 @@ class Sentences extends Component {
                   return (
                     <div className="sentence-block">
                       <FontAwesomeIcon icon={faVolumeUp} />
-                      <p key={`${sentence}-${i}`} className="sentence">
-                        {sentence}
+                      <p key={`${sentence.text}-${i}`} className="sentence">
+                        {sentence.text}
                       </p>
                     </div>
                   );

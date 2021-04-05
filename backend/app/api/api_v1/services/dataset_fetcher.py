@@ -92,13 +92,7 @@ def _prepare_data(dataset_response: List[Dict]):
             for word_by_topic in words_grouped_by_topic
         ]
 
-        results.append(
-            ModelResponse(
-                topic=caption_group["topic"], words=word_and_sentences
-            )
-        )
-
-    return results
+    return ModelResponse(topic=caption_group["topic"], words=word_and_sentences)
 
 
 def _prepare_sentences(sentences: Dict) -> List[Sentence]:

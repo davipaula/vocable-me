@@ -20,17 +20,16 @@ app = FastAPI(
     title=config.PROJECT_NAME, docs_url="/api/docs", openapi_url="/api"
 )
 
-origins = [
-    "http://localhost:3000"
-]
+origins = ["http://localhost:3000"]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"]
+    allow_headers=["*"],
 )
+
 
 @app.middleware("http")
 async def db_session_middleware(request: Request, call_next):
@@ -43,13 +42,6 @@ async def db_session_middleware(request: Request, call_next):
 @app.get("/api/v1")
 async def root():
     return {"message": "Hello World"}
-
-
-@app.get("/audio")
-async def main():
-    return FileResponse(
-        "/app/app/static/audio/00_00_12-00_00_14-albert_laszlo_barabasi_the_real_relationship_between_your_age_and_your_chance_of_success.mp3"
-    )
 
 
 # @app.get("/api/v1/task")
@@ -69,7 +61,7 @@ app.include_router(
 app.include_router(auth_router, prefix="/api", tags=["auth"])
 app.include_router(words_router, prefix="/api/v1", tags=["words"])
 
-app.mount("/static", StaticFiles(directory="/app/app/static"), name="static")
+app.mount("/files", StaticFiles(directory="/app/app/files"), name="files")
 
 # if __name__ == "__main__":
 #     uvicorn.run("main:app", host="0.0.0.0", reload=True, port=8888, log_level='debug', reload_delay=0.1)
