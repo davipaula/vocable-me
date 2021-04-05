@@ -37,7 +37,7 @@ class SelectTopic extends Component {
   };
   componentDidMount() {
     this.setState({ loading: true });
-    fetch('http://localhost:8000/api/v1/topics/')
+    fetch('http://localhost/api/v1/topics/')
       .then((res) => res.json())
       .then((data) =>
         this.setState({ loading: false, availableTopics: data.topics })

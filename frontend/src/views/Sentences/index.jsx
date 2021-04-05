@@ -32,7 +32,7 @@ class Sentences extends Component {
     selectedTopics && selectedTopics.length > 0
       ? selectedTopics.forEach((topic, index) => {
           fetch(
-            `http://localhost:8000/api/v1/sentences/?topic=${topic}&number_of_words=${wordsNr}&number_of_sentences=5`
+            `http://localhost/api/v1/sentences/?topic=${topic}&number_of_words=${wordsNr}&number_of_sentences=5`
           )
             .then((res) => res.json())
             .then((data) => {
