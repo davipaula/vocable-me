@@ -58,6 +58,7 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
       with:
+        context: frontend
+        file: frontend/Dockerfile
         repository: davinp/vocable_me_front
-        dockerfile: frontend/Dockerfile
         tags: latest
