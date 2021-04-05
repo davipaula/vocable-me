@@ -5,9 +5,11 @@ on:
   pull_request:
     branches:
       - main
+      - deployment_process_v2
   push:
     branches:
       - main
+      - deployment_process_v2
 
 jobs:
   build-and-deploy-back:
