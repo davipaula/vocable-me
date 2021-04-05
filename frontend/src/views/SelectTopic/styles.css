@@ -1,0 +1,174 @@
+main.topics-scene div.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1%;
+}
+
+main.topics-scene h2.topics-title {
+  margin: 3% auto 2% auto;
+  text-align: center;
+  color: var(--english-violet);
+}
+
+main.topics-scene div.cta-text {
+  width: 45vw;
+  margin: 0 auto 2% auto;
+}
+
+main.topics-scene div.cta-text p {
+  font-size: 20px;
+  color: #4f666a;
+  text-align: center;
+  font-weight: 500;
+  line-height: 200%;
+}
+
+main.topics-scene div.cta-text p button {
+  border-radius: 6px;
+  border: none;
+  background-color: var(--amazon);
+  padding: 1% 2%;
+  color: whitesmoke;
+  font-size: 20px;
+  margin-left: 1%;
+  cursor: pointer;
+  filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25));
+}
+
+main.topics-scene div.cta-text p button:focus {
+  outline: none;
+}
+
+main.topics-scene div.cta-text p button:hover {
+  background-color: whitesmoke;
+  color: var(--amazon);
+}
+
+main.topics-scene div.cta-text p button.tooltip .tooltiptext {
+  font-size: 13px;
+  padding: 2%;
+}
+
+main.topics-scene div.topics-container {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 60vw;
+  margin: 0 auto;
+  gap: 4%;
+}
+
+main.topics-scene div.topics-container div:nth-of-type(odd) {
+  justify-self: end;
+}
+main.topics-scene div.topics-container div:nth-of-type(even) {
+  justify-self: start;
+}
+
+main.topics-scene div.topics-container div:last-of-type {
+  margin-bottom: 5%;
+}
+
+main.topics-scene div.topics-container div h3 {
+  margin: 0.8% auto;
+  width: 240px;
+  padding: 8% 4%;
+  background-color: #f8f8f8;
+  color: var(--english-violet);
+  border-radius: 6px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  appearance: button;
+}
+
+main.topics-scene div.topics-container div h3:after {
+  content: '';
+  background: white;
+  opacity: 0;
+  transition: all 0.8s;
+}
+
+main.topics-scene div.topics-container div h3:active:after {
+  opacity: 1;
+  transition: 0s;
+}
+
+main.topics-scene div.topics-container div h3.disabled-topics {
+  color: #d8d8d8;
+}
+
+main.topics-scene div.topics-container div {
+  filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25));
+}
+
+main.topics-scene div.topics-container div.enabled-topics {
+  cursor: pointer;
+}
+
+main.topics-scene div.topics-container div:hover h3.enabled-topics {
+  color: var(--amazon);
+}
+
+main.topics-scene div.topics-container div h3 svg {
+  margin-right: 3%;
+}
+
+main.topics-scene div.topics-container div h3.chosen-topic {
+  background-color: #c0c0c0;
+  color: var(--amazon);
+}
+
+main.topics-scene div.topics-container div h3.chosen-topic svg {
+  color: red;
+}
+
+div.loader {
+  text-align: center;
+}
+
+/* Tooltip */
+.tooltip {
+  position: relative;
+  display: inline-block; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  top: 50%;
+  left: 60%;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 9;
+  font-size: 10px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+@media screen and (max-width: 600px) {
+  main.topics-scene h2.topics-title {
+    font-size: 28px;
+    margin: 10% auto;
+  }
+
+  main.topics-scene div.topics-container {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 60vw;
+    margin-bottom: 2%;
+  }
+
+  main.topics-scene div.topics-container div {
+    justify-self: stretch !important;
+  }
+}

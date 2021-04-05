@@ -1,0 +1,17 @@
+{
+  "br": {
+    "topics": {
+      "culinary": "culinária",
+      "business": "Negócios",
+      "technology": "Tecnologia",
+      "movies": "Cinema",
+      "music": "Música",
+      "politics": "Política",
+      "sports": "Esportes",
+      "literature": "Literatura",
+      "law": "Direito",
+      "title": "Quais são seus assuntos preferidos?",
+      "design": "Design"
+    }
+  }
+}
