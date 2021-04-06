@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Styles
 import './sentencesStyles.css';
+import {BACKEND_URL} from "../../config";
 
 const mapStateToProps = (state) => {
   return {
@@ -32,7 +33,7 @@ class Sentences extends Component {
     selectedTopics && selectedTopics.length > 0
       ? selectedTopics.forEach((topic, index) => {
           fetch(
-            `http://localhost:8000/api/v1/sentences/?topic=${topic}&number_of_words=${wordsNr}&number_of_sentences=5`
+            `${BACKEND_URL}sentences/?topic=${topic}&number_of_words=${wordsNr}&number_of_sentences=5`
           )
             .then((res) => res.json())
             .then((data) => {
@@ -53,7 +54,6 @@ class Sentences extends Component {
   render() {
     const { selectedTopics } = this.props;
     const { words, errorMsg } = this.state;
-    console.log(words);
     const loading =
       selectedTopics.length > 0 && words.length === 0 ? true : false;
     const error = errorMsg.length > 1 ? true : false;
