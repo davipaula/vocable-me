@@ -11,7 +11,7 @@ LOG_FORMAT = "[%(asctime)s] [%(levelname)s] %(message)s (%(funcName)s@%(filename
 logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
 
 
-AUDIO_FILES_PATH = "/static/audio/"
+AUDIO_FILES_PATH = "/static/filename/"
 
 
 @r.get("/topics/")

@@ -14,6 +14,7 @@ import { addRemoveTopic, toggleModal } from '../../redux/actions/actionTopics';
 
 // Styles
 import './styles.css';
+import {BACKEND_URL} from "../../config";
 
 const mapStateToProps = (state) => {
   return {
@@ -30,6 +31,8 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
+const TOPICS_ENDPOINT = BACKEND_URL + 'topics/';
+
 class SelectTopic extends Component {
   state = {
     availableTopics: [],
@@ -37,7 +40,7 @@ class SelectTopic extends Component {
   };
   componentDidMount() {
     this.setState({ loading: true });
-    fetch('http://localhost:8000/api/v1/topics/')
+    fetch(TOPICS_ENDPOINT)
       .then((res) => res.json())
       .then((data) =>
         this.setState({ loading: false, availableTopics: data.topics })
