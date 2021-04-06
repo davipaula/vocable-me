@@ -16,7 +16,7 @@ def select_video_captions() -> List[VideoCaption]:
     - Sentences per word: 10
     - Number of topics: 5
 
-    In total, we will end up with a maximum of 200 * 10 * 5 = 10,000 audio files
+    In total, we will end up with a maximum of 200 * 10 * 5 = 10,000 filename files
     """
     # We already have saved the top 200 most important words per topic
     important_words = get_unique_important_words()[:70]

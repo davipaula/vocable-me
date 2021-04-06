@@ -35,8 +35,8 @@ def download_audios(video_ids: List[str], base_url: str) -> None:
         download_cmd = [
             "youtube-dl",
             "--write-sub",
-            "--extract-audio",
-            "--audio-format 'mp3'",
+            "--extract-filename",
+            "--filename-format 'mp3'",
             "--no-check-certificate",
             "-o",
             f"'{file_name}.%(ext)s'",

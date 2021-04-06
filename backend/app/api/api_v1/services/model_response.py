@@ -4,7 +4,7 @@ from typing import List
 
 @dataclass
 class Sentence(object):
-    audio: str
+    filename: str
     text: str
 
 

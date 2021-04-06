@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Styles
 import './sentencesStyles.css';
-import {BACKEND_URL} from "../../config";
+import {AUDIOS_URL, BACKEND_URL} from "../../config";
 
 const mapStateToProps = (state) => {
   return {
@@ -57,6 +57,12 @@ class Sentences extends Component {
     const loading =
       selectedTopics.length > 0 && words.length === 0 ? true : false;
     const error = errorMsg.length > 1 ? true : false;
+
+    const playAudio = (filename) => {
+        const audio = new Audio(AUDIOS_URL + filename);
+        audio.play();
+    }
+
     const singleWords =
       words.length > 0 &&
       words.map((word, index) => {
@@ -67,7 +73,7 @@ class Sentences extends Component {
                 {word.sentences.map((sentence, i) => {
                   return (
                     <div className="sentence-block">
-                      <FontAwesomeIcon icon={faVolumeUp} />
+                      <FontAwesomeIcon icon={faVolumeUp} onClick={() => playAudio(sentence.filename)} />
                       <p key={`${sentence.text}-${i}`} className="sentence">
                         {sentence.text}
                       </p>

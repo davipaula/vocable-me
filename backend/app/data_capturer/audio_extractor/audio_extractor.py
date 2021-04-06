@@ -17,7 +17,7 @@ MINUTES_IN_SECONDS = 60
 
 BUFFER_IN_SECONDS = 1
 
-OUTPUT_PATH = "/app/app/data/processed/audio/"
+OUTPUT_PATH = "/app/app/data/processed/filename/"
 
 logger = logging.getLogger(__name__)
 LOG_FORMAT = "[%(asctime)s] [%(levelname)s] %(message)s (%(funcName)s@%(filename)s:%(lineno)s)"
@@ -30,26 +30,26 @@ def run():
     logger.info(
         f"""Data retrieved from DB. \n
     Videos to process: {len(video_captions)} \n
-     Starting audio extraction"""
+     Starting filename extraction"""
     )
 
     split_audio_files(video_captions)
 
 
 def split_audio_files(video_captions: List[VideoCaption]):
-    os.chdir("/app/app/data/raw/audio/")
+    os.chdir("/app/app/data/raw/filename/")
     raw_audio_path = "./"
 
     if video_captions is None:
         # TODO if no video captions are provided, extract sentences of all audios
         raise NotImplementedError
 
-    # Extract audio of these words
+    # Extract filename of these words
     output_files = []
     for caption in tqdm(video_captions):
         original_filename = caption.get_original_filename()
         if not os.path.isfile(original_filename):
-            # Not every text contains an audio file.
+            # Not every text contains an filename file.
             logger.info(f"File {original_filename} does not exist!")
             continue
 
@@ -61,7 +61,7 @@ def split_audio_files(video_captions: List[VideoCaption]):
         )
 
         try:
-            # "atrim" means "audio trim". This is needed because we're working with audio tracks only
+            # "atrim" means "filename trim". This is needed because we're working with filename tracks only
             input_file = ffmpeg.input(
                 raw_audio_path + original_filename
             ).filter("atrim", start=start_in_seconds, end=end_in_seconds)
