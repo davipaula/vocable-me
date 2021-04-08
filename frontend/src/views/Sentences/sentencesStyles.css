@@ -1,0 +1,32 @@
+div.loader {
+  margin-top: 10%;
+  margin-bottom: auto;
+}
+
+div.MuiBackdrop-root {
+  background-color: var(--turquoise-green);
+}
+
+div.MuiPaper-root p.MuiTypography-root {
+  font-family: 'Montserrat', sans-serif;
+}
+
+div.sentences-container {
+  padding: 0 6%;
+}
+
+div.sentence-block {
+  display: grid;
+  grid-template-columns: 1fr 11fr;
+  margin-bottom: 6%;
+}
+
+p.sentence {
+  text-align: left;
+}
+
+div.sentence-block svg {
+  cursor: pointer;
+  padding-right: 2%;
+  align-self: center;
+}

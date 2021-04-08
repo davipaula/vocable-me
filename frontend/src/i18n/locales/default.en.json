@@ -1,0 +1,17 @@
+{
+  "en": {
+    "topics": {
+      "culinary": "Cooking",
+      "business": "Business",
+      "technology": "Technology",
+      "movies": "Movies",
+      "music": "Music",
+      "politics": "Politics",
+      "sports": "Sports",
+      "literature": "Literature",
+      "law": "Law",
+      "title": "What topics do you love?",
+      "design": "Design"
+    }
+  }
+}
