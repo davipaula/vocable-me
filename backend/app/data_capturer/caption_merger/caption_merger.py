@@ -1,37 +1,38 @@
-from typing import List
+from typing import Dict, List
 
 import spacy
 
+FINAL_PUNCTUATION = [".", "!", "?"]
 
-def merge_captions(sentences: List[str]):
-    nlp = spacy.load("en_core_web_sm")
-
-    final_sentences = []
-    merged_sentence = []
-
-    for index, sentence in enumerate(sentences):
-        doc = nlp(sentence)
-
-        for sent in doc.sents:
-            if sent[-1].is_punct or index == len(sentences) - 1:
-                merged_sentence.append(sent.text)
-                final_sentences.append(" ".join(merged_sentence))
-
-                merged_sentence = []
-                continue
-
-            merged_sentence.append(sent.text)
-
-    print(final_sentences)
+nlp = spacy.load("en_core_web_sm")
 
 
-if __name__ == "__main__":
-    sentences = [
-        "This is a text with a punctuation.",
-        "This is a text without punctuation",
-        "and this is the continuation of the text",
-        "and this is the final part.",
-        "This is the final U.K. sentence, without punctuation",
-    ]
+def merge_captions(captions: List[Dict]):
 
-    merge_captions(sentences)
+    tokenized_captions = [nlp(caption["text"]) for caption in captions]
+
+    merged_fragments = []
+    sentence_fragments = []
+    current_start_timestamp = None
+    for index, tokenized_caption in enumerate(tokenized_captions):
+        sentence_fragments.append(tokenized_caption.text)
+
+        if current_start_timestamp is None:
+            current_start_timestamp = captions[index]["start"]
+
+        if (
+            tokenized_caption[-1].text in FINAL_PUNCTUATION
+            or index == len(tokenized_captions) - 1
+        ):
+            merged_fragments.append(
+                {
+                    "start": current_start_timestamp,
+                    "end": captions[index]["end"],
+                    "text": " ".join(sentence_fragments),
+                }
+            )
+
+            sentence_fragments = []
+            current_start_timestamp = None
+
+    return merged_fragments
