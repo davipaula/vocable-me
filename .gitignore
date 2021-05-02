@@ -4,3 +4,4 @@ backend/app/data/processed/caption/dataset.jsonl
 /backend/app/__pycache__
 
 node_modules/
+**/__pycache__/

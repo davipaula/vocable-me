@@ -38,7 +38,7 @@ def run():
         video_titles=get_processed_video_ids(),
     )
 
-    # Check which sentences were properly processed and prepare result
+    # Check which captions were properly processed and prepare result
     available_sentence_audios = get_available_sentence_audios(
         get_available_audio_files(), sentences
     )
